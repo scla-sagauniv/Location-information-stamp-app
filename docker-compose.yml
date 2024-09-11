@@ -1,0 +1,14 @@
+version: '3.7'
+
+services:
+  location-stamp-app:
+    container_name: "location-stamp-app"
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/app
+      - /app/node_modules
+    ports:
+      - "5173:5173"
+    command: ["npm", "run", "dev"]
