@@ -11,11 +11,12 @@ function GPS() {
 
 	return (
 		<>
-			<div>
+			<div className="text-blue-600">
 				{isWithinRadius
 					? 'スタンプ獲得!!'
 					: 'スタンプ獲得まで30m圏内に入ってください'}
 			</div>
+			<div className="text-blue-700 text-xl">aaaa</div>
 		</>
 	);
 }
