@@ -1,4 +1,5 @@
 import { useGeolocation } from '../hooks/useGeolocation';
+import { Button } from '@/components/ui/button';
 
 function GPS() {
 	const targetLocation = {
@@ -17,6 +18,7 @@ function GPS() {
 					: 'スタンプ獲得まで30m圏内に入ってください'}
 			</div>
 			<div className="text-blue-700 text-xl">aaaa</div>
+			<Button>スタンプを獲得する</Button>
 		</>
 	);
 }
