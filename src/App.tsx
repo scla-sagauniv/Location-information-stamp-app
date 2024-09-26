@@ -10,8 +10,8 @@ function App() {
 			<div className="App">
 				<BrowserRouter>
 					<Routes>
-						<Route path="/" element={<Home />} />
-						<Route path="/gps" element={<GPS />} />
+						<Route path="/gps" element={<Home />} />
+						<Route path="/" element={<GPS />} />
 						<Route path="*" element={<Page404 />} />
 					</Routes>
 				</BrowserRouter>

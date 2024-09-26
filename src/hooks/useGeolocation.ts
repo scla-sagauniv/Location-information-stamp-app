@@ -8,8 +8,9 @@ interface Location {
 export const useGeolocation = (
 	targetLocation: Location,
 	radius: number,
-): boolean => {
+): { isWithinRadius: boolean; altitude: number | null } => {
 	const [isWithinRadius, setIsWithinRadius] = useState(false);
+	const [altitude, setAltitude] = useState<number | null>(0);
 
 	useEffect(() => {
 		const watchId = navigator.geolocation.watchPosition(
@@ -20,6 +21,7 @@ export const useGeolocation = (
 					targetLocation.lat,
 					targetLocation.lon,
 				);
+				setAltitude(position.coords.altitude);
 				if (distance < radius) {
 					setIsWithinRadius(true);
 				}
@@ -34,7 +36,7 @@ export const useGeolocation = (
 
 		return () => navigator.geolocation.clearWatch(watchId);
 	}, []);
-	return isWithinRadius;
+	return { isWithinRadius, altitude };
 };
 
 const deg2rad = (deg: number): number => {
