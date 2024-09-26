@@ -9,7 +9,9 @@ export const useGeolocation = (
 	targetLocation: Location,
 	radius: number,
 ): { isWithinRadius: boolean; altitude: number | null } => {
-	const [isWithinRadius, setIsWithinRadius] = useState(false);
+	const [isWithinRadius, setIsWithinRadius] = useState<boolean>(() => {
+		return localStorage.getItem('isWithinRadius') === 'true';
+	});
 	const [altitude, setAltitude] = useState<number | null>(0);
 
 	useEffect(() => {
@@ -24,6 +26,7 @@ export const useGeolocation = (
 				setAltitude(position.coords.altitude);
 				if (distance < radius) {
 					setIsWithinRadius(true);
+					localStorage.setItem('isWithinRadius', 'true');
 				}
 			},
 			(error) => console.error('位置情報の取得に失敗しました', error),
@@ -35,7 +38,8 @@ export const useGeolocation = (
 		);
 
 		return () => navigator.geolocation.clearWatch(watchId);
-	}, []);
+	}, [targetLocation, radius]);
+
 	return { isWithinRadius, altitude };
 };
 
