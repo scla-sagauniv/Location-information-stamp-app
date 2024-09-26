@@ -1,4 +1,5 @@
 import { useGeolocation } from '@/hooks/useGeolocation';
+import StampCard from '@/components/StampCard';
 
 function GPS() {
 	const targetLocation = {
@@ -7,20 +8,11 @@ function GPS() {
 	};
 	const radius = 30;
 
-	const isWithinRadius = useGeolocation(targetLocation, radius);
+	const { isWithinRadius } = useGeolocation(targetLocation, radius);
 
 	return (
-		<div className="h-screen w-screen flex items-center justify-center">
-			<div className="radar-container">
-				<div className="radar-bg">
-					<div className="radar-scan-line"></div>
-				</div>
-			</div>
-			<div>
-				{isWithinRadius.isWithinRadius
-					? 'スタンプ獲得!!'
-					: 'スタンプ獲得まで30m圏内に入ってください'}
-			</div>
+		<div className="h-screen w-screen flex items-center justify-center bg-gray-100">
+			<StampCard isStamped={isWithinRadius} />
 		</div>
 	);
 }
