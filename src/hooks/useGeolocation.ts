@@ -6,39 +6,47 @@ interface Location {
 }
 
 export const useGeolocation = (
-	targetLocation: Location,
+	targetLocations: Location[],
 	radius: number,
-): { isWithinRadius: boolean; altitude: number | null } => {
-	const [isWithinRadius, setIsWithinRadius] = useState<boolean>(() => {
-		return localStorage.getItem('isWithinRadius') === 'true';
-	});
-	const [altitude, setAltitude] = useState<number | null>(0);
+): { isWithinRadius: boolean[]; altitude: number | null } => {
+	const [isWithinRadius, setIsWithinRadius] = useState<boolean[]>(() =>
+		targetLocations.map(
+			(_, index) => localStorage.getItem(`isWithinRadius-${index}`) === 'true',
+		),
+	);
+	const [altitude, setAltitude] = useState<number | null>(null);
 
 	useEffect(() => {
-		const watchId = navigator.geolocation.watchPosition(
-			(position) => {
-				const distance = calculateDistanceUsingHaversine(
-					position.coords.latitude,
-					position.coords.longitude,
-					targetLocation.lat,
-					targetLocation.lon,
-				);
-				setAltitude(position.coords.altitude);
-				if (distance < radius) {
-					setIsWithinRadius(true);
-					localStorage.setItem('isWithinRadius', 'true');
-				}
-			},
-			(error) => console.error('位置情報の取得に失敗しました', error),
-			{
-				enableHighAccuracy: true,
-				timeout: 5000,
-				maximumAge: 0,
-			},
+		const watchIds: number[] = targetLocations.map((targetLocation, index) =>
+			navigator.geolocation.watchPosition(
+				(position) => {
+					const distance = calculateDistanceUsingHaversine(
+						position.coords.latitude,
+						position.coords.longitude,
+						targetLocation.lat,
+						targetLocation.lon,
+					);
+					if (distance < radius && !isWithinRadius[index]) {
+						const updatedIsWithinRadius = [...isWithinRadius];
+						updatedIsWithinRadius[index] = true;
+						setIsWithinRadius(updatedIsWithinRadius);
+						localStorage.setItem(`isWithinRadius-${index}`, 'true');
+					}
+					setAltitude(position.coords.altitude);
+				},
+				(error) => console.error('位置情報の取得に失敗しました', error),
+				{
+					enableHighAccuracy: true,
+					timeout: 5000,
+					maximumAge: 0,
+				},
+			),
 		);
 
-		return () => navigator.geolocation.clearWatch(watchId);
-	}, [targetLocation, radius]);
+		return () => {
+			watchIds.forEach((id) => navigator.geolocation.clearWatch(id));
+		};
+	}, [targetLocations, radius, isWithinRadius]);
 
 	return { isWithinRadius, altitude };
 };
@@ -63,6 +71,6 @@ const calculateDistanceUsingHaversine = (
 			Math.sin(dLon / 2) *
 			Math.sin(dLon / 2);
 	const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-	const d = R * c;
-	return d * 1000;
+	const distance = R * c;
+	return distance * 1000;
 };
