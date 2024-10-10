@@ -22,20 +22,29 @@ function GPS() {
 
 	return (
 		<div className="h-screen w-screen bg-gray-100">
-			<StampCard stamps={stamps.isWithinRadius} />
-			<Dialog>
-				<DialogTrigger>
-					<Button className="fixed right-4 bottom-4">説明</Button>
-				</DialogTrigger>
-				<DialogContent className="w-4/5">
-					<DialogHeader>
-						<DialogTitle>アプリの使い方</DialogTitle>
-					</DialogHeader>
-					<DialogDescription>
-						<p>Dialog Description</p>
-					</DialogDescription>
-				</DialogContent>
-			</Dialog>
+			<div className="fixed right-4 bottom-4 space-x-1">
+				<Dialog>
+					<DialogTrigger>
+						<Button className="">スタンプ</Button>
+					</DialogTrigger>
+					<DialogContent className="w-4/5">
+						<StampCard stamps={stamps.isWithinRadius} />
+					</DialogContent>
+				</Dialog>
+				<Dialog>
+					<DialogTrigger>
+						<Button className="">説明</Button>
+					</DialogTrigger>
+					<DialogContent className="w-4/5">
+						<DialogHeader>
+							<DialogTitle>アプリの使い方</DialogTitle>
+						</DialogHeader>
+						<DialogDescription>
+							<p>Dialog Description</p>
+						</DialogDescription>
+					</DialogContent>
+				</Dialog>
+			</div>
 		</div>
 	);
 }
