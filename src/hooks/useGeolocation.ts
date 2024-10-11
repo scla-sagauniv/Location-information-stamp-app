@@ -10,9 +10,14 @@ export const useGeolocation = (
 	radius: number,
 ): { isWithinRadius: boolean[]; altitude: number | null } => {
 	const [isWithinRadius, setIsWithinRadius] = useState<boolean[]>(() =>
-		targetLocations.map(
-			(_, index) => localStorage.getItem(`isWithinRadius-${index}`) === 'true',
-		),
+		targetLocations.map((_, index) => {
+			const savedValue = localStorage.getItem(`isWithinRadius-${index}`);
+			if (savedValue === null) {
+				localStorage.setItem(`isWithinRadius-${index}`, 'false');
+				return false;
+			}
+			return savedValue === 'true';
+		}),
 	);
 	const [altitude, setAltitude] = useState<number | null>(null);
 
@@ -26,6 +31,7 @@ export const useGeolocation = (
 						targetLocation.lat,
 						targetLocation.lon,
 					);
+
 					if (distance < radius && !isWithinRadius[index]) {
 						const updatedIsWithinRadius = [...isWithinRadius];
 						updatedIsWithinRadius[index] = true;
