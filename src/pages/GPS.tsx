@@ -12,16 +12,11 @@ import {
 } from '@/components/ui/dialog';
 
 function GPS() {
-	const [isExplanationOpen, setIsExplanationOpen] = useModalOnFirstLoad();
-
-	const targetLocations = [
-		{ lat: 33.2382305, lon: 130.2962176 },
-		{ lat: 33.24, lon: 130.297 },
-		{ lat: 33.2382305, lon: 130.2962176 },
-	];
+	const [isExplanationOpen, setIsExplanationOpen, selectedLocations] =
+		useModalOnFirstLoad();
 	const radius = 30;
 
-	const stamps = useGeolocation(targetLocations, radius);
+	const stamps = useGeolocation(selectedLocations, radius);
 
 	return (
 		<div className="h-screen w-screen bg-gray-100">

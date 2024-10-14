@@ -1,9 +1,5 @@
 import { useState, useEffect } from 'react';
-
-interface Location {
-	lat: number;
-	lon: number;
-}
+import { Location } from '@/types';
 
 export const useGeolocation = (
 	targetLocations: Location[],
@@ -37,6 +33,11 @@ export const useGeolocation = (
 						updatedIsWithinRadius[index] = true;
 						setIsWithinRadius(updatedIsWithinRadius);
 						localStorage.setItem(`isWithinRadius-${index}`, 'true');
+					} else if (
+						distance >= radius &&
+						localStorage.getItem(`isWithinRadius-${index}`) === null
+					) {
+						localStorage.setItem(`isWithinRadius-${index}`, 'false');
 					}
 					setAltitude(position.coords.altitude);
 				},
