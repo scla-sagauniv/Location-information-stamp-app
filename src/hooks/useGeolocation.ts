@@ -56,8 +56,8 @@ export const useGeolocation = (
 				(error) => console.error('位置情報の取得に失敗しました', error),
 				{
 					enableHighAccuracy: true,
-					timeout: 5000,
-					maximumAge: 0,
+					timeout: 10000,
+					maximumAge: 5000,
 				},
 			),
 		);
@@ -65,7 +65,7 @@ export const useGeolocation = (
 		return () => {
 			watchIds.forEach((id) => navigator.geolocation.clearWatch(id));
 		};
-	}, [targetLocations]);
+	}, [targetLocations, radius]);
 
 	return { isWithinRadius, altitude };
 };
