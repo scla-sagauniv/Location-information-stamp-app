@@ -1,12 +1,5 @@
-
-
 function Test() {
-
-	return (
-		<p>
-test
-        </p>
-	);
+	return <p>test Test test</p>;
 }
 
 export default Test;
