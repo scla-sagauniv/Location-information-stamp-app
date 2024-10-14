@@ -4,16 +4,9 @@ import { Location } from '@/types';
 export const useGeolocation = (
 	targetLocations: Location[],
 	radius: number,
-): { isWithinRadius: boolean[]; altitude: number | null } => {
-	const [isWithinRadius, setIsWithinRadius] = useState<boolean[]>(() =>
-		targetLocations.map((_, index) => {
-			const savedValue = localStorage.getItem(`isWithinRadius-${index}`);
-			if (savedValue === null) {
-				localStorage.setItem(`isWithinRadius-${index}`, 'false');
-				return false;
-			}
-			return savedValue === 'true';
-		}),
+): { isWithinRadius: (boolean | null)[]; altitude: number | null } => {
+	const [isWithinRadius, setIsWithinRadius] = useState<(boolean | null)[]>(() =>
+		targetLocations.map(() => null),
 	);
 	const [altitude, setAltitude] = useState<number | null>(null);
 
@@ -28,17 +21,18 @@ export const useGeolocation = (
 						targetLocation.lon,
 					);
 
-					if (distance < radius && !isWithinRadius[index]) {
-						const updatedIsWithinRadius = [...isWithinRadius];
-						updatedIsWithinRadius[index] = true;
-						setIsWithinRadius(updatedIsWithinRadius);
-						localStorage.setItem(`isWithinRadius-${index}`, 'true');
-					} else if (
-						distance >= radius &&
-						localStorage.getItem(`isWithinRadius-${index}`) === null
-					) {
-						localStorage.setItem(`isWithinRadius-${index}`, 'false');
-					}
+					setIsWithinRadius((prevIsWithinRadius) => {
+						const updatedIsWithinRadius = [...prevIsWithinRadius];
+
+						if (distance <= radius && prevIsWithinRadius[index] !== true) {
+							updatedIsWithinRadius[index] = true;
+							localStorage.setItem(`isWithinRadius-${index}`, 'true');
+						} else if (distance > radius && prevIsWithinRadius[index] == null) {
+							updatedIsWithinRadius[index] = false;
+							localStorage.setItem(`isWithinRadius-${index}`, 'false');
+						}
+						return updatedIsWithinRadius;
+					});
 					setAltitude(position.coords.altitude);
 				},
 				(error) => console.error('位置情報の取得に失敗しました', error),
@@ -53,7 +47,7 @@ export const useGeolocation = (
 		return () => {
 			watchIds.forEach((id) => navigator.geolocation.clearWatch(id));
 		};
-	}, [targetLocations, radius, isWithinRadius]);
+	}, [targetLocations, radius]);
 
 	return { isWithinRadius, altitude };
 };

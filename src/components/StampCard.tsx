@@ -1,7 +1,7 @@
 import Stamp from './Stamp';
 
 type StampCardProps = {
-	stamps: boolean[];
+	stamps: (boolean | null)[];
 };
 
 const StampCard = ({ stamps }: StampCardProps) => {
