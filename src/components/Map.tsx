@@ -1,9 +1,9 @@
 import MapBlock from '@/components/MapBlock';
 
-function Test() {
+function Map() {
 	return (
 		<div className="overflow-x-scroll">
-			<div className="relative flex bg-red-500 h-screen w-[884px]">
+			<div className="relative flex h-screen w-[884px]">
 				<MapBlock
 					className="absolute left-[64px] bottom-[64px] w-[128px] h-[128px]"
 					label="図書館"
@@ -45,4 +45,4 @@ function Test() {
 	);
 }
 
-export default Test;
+export default Map;
