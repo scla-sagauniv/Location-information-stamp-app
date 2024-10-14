@@ -2,6 +2,7 @@ import { useGeolocation } from '@/hooks/useGeolocation';
 import { useFirstLoad } from '@/hooks/useFirstLoad';
 import StampCard from '@/components/StampCard';
 import { Button } from '@/components/ui/button';
+import Map from '@/components/Map';
 import {
 	Dialog,
 	DialogContent,
@@ -20,6 +21,7 @@ function GPS() {
 
 	return (
 		<div className="h-screen w-screen bg-gray-100">
+			<Map></Map>
 			<div className="fixed right-4 bottom-4 space-x-1">
 				<Dialog>
 					<DialogTrigger>
