@@ -7,7 +7,6 @@ export const useGeolocation = (
 ): { isWithinRadius: boolean[]; altitude: number | null } => {
 	const [isWithinRadius, setIsWithinRadius] = useState<boolean[]>(() =>
 		targetLocations.map((_, index) => {
-			console.log('index番号', index);
 			const savedValue = localStorage.getItem(`isWithinRadius-${index}`);
 			if (savedValue == null) {
 				localStorage.setItem(`isWithinRadius-${index}`, 'false');
@@ -19,6 +18,10 @@ export const useGeolocation = (
 	const [altitude, setAltitude] = useState<number | null>(null);
 
 	useEffect(() => {
+		if (targetLocations.length === 0) {
+			console.log('targetLocationsが0です');
+			return;
+		}
 		const watchIds: number[] = targetLocations.map((targetLocation, index) =>
 			navigator.geolocation.watchPosition(
 				(position) => {
@@ -28,14 +31,21 @@ export const useGeolocation = (
 						targetLocation.lat,
 						targetLocation.lon,
 					);
-
 					setIsWithinRadius((prevIsWithinRadius) => {
 						const updatedIsWithinRadius = [...prevIsWithinRadius];
 
-						if (distance <= radius && prevIsWithinRadius[index] !== true) {
+						if (localStorage.getItem(`isWithinRadius-${index}`) === 'true') {
+							updatedIsWithinRadius[index] = true;
+						} else if (
+							distance <= radius &&
+							prevIsWithinRadius[index] !== true
+						) {
 							updatedIsWithinRadius[index] = true;
 							localStorage.setItem(`isWithinRadius-${index}`, 'true');
-						} else if (distance > radius && prevIsWithinRadius[index] == null) {
+						} else if (
+							distance > radius &&
+							prevIsWithinRadius[index] !== false
+						) {
 							updatedIsWithinRadius[index] = false;
 							localStorage.setItem(`isWithinRadius-${index}`, 'false');
 						}
@@ -55,7 +65,7 @@ export const useGeolocation = (
 		return () => {
 			watchIds.forEach((id) => navigator.geolocation.clearWatch(id));
 		};
-	}, [targetLocations, radius]);
+	}, [targetLocations]);
 
 	return { isWithinRadius, altitude };
 };
