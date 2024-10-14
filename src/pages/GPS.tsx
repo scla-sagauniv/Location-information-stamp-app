@@ -1,5 +1,5 @@
 import { useGeolocation } from '@/hooks/useGeolocation';
-import { useModalOnFirstLoad } from '@/hooks/useModalOnFirstLoad';
+import { useFirstLoad } from '@/hooks/useFirstLoad';
 import StampCard from '@/components/StampCard';
 import { Button } from '@/components/ui/button';
 import {
@@ -13,7 +13,7 @@ import {
 
 function GPS() {
 	const [isExplanationOpen, setIsExplanationOpen, selectedLocations] =
-		useModalOnFirstLoad();
+		useFirstLoad();
 	const radius = 30;
 
 	const stamps = useGeolocation(selectedLocations, radius);

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Location } from '@/types';
 
-export const useModalOnFirstLoad = (): [
+export const useFirstLoad = (): [
 	boolean,
 	(open: boolean) => void,
 	Location[],
