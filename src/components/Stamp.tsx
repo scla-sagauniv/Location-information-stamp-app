@@ -1,5 +1,5 @@
 type StampProps = {
-	filled: boolean | null;
+	filled: boolean;
 };
 
 const Stamp = ({ filled }: StampProps) => {

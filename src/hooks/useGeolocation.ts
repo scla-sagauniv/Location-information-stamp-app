@@ -4,9 +4,17 @@ import { Location } from '@/types';
 export const useGeolocation = (
 	targetLocations: Location[],
 	radius: number,
-): { isWithinRadius: (boolean | null)[]; altitude: number | null } => {
-	const [isWithinRadius, setIsWithinRadius] = useState<(boolean | null)[]>(() =>
-		targetLocations.map(() => null),
+): { isWithinRadius: boolean[]; altitude: number | null } => {
+	const [isWithinRadius, setIsWithinRadius] = useState<boolean[]>(() =>
+		targetLocations.map((_, index) => {
+			console.log('index番号', index);
+			const savedValue = localStorage.getItem(`isWithinRadius-${index}`);
+			if (savedValue == null) {
+				localStorage.setItem(`isWithinRadius-${index}`, 'false');
+				return false;
+			}
+			return savedValue === 'true';
+		}),
 	);
 	const [altitude, setAltitude] = useState<number | null>(null);
 
