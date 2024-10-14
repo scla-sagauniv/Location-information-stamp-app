@@ -4,8 +4,7 @@ function Test() {
 
 	return (
 		<p>
-            testtest
-			test
+test
         </p>
 	);
 }
