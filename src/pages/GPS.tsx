@@ -28,7 +28,7 @@ function GPS() {
 			<div className="fixed right-4 bottom-4 space-x-1">
 				<Dialog>
 					<DialogTrigger>
-						<Button className="">スタンプ</Button>
+						<Button className="bg-green-600">スタンプ</Button>
 					</DialogTrigger>
 					<DialogContent className="w-4/5">
 						<StampCard stamps={stamps.isWithinRadius} />
@@ -36,7 +36,7 @@ function GPS() {
 				</Dialog>
 				<Dialog open={isExplanationOpen} onOpenChange={setIsExplanationOpen}>
 					<DialogTrigger>
-						<Button className="">説明</Button>
+						<Button className="bg-blue-500">説明</Button>
 					</DialogTrigger>
 					<DialogContent className="w-11/12">
 						<DialogHeader>
