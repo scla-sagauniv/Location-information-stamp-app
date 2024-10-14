@@ -65,7 +65,7 @@ export const useGeolocation = (
 		return () => {
 			watchIds.forEach((id) => navigator.geolocation.clearWatch(id));
 		};
-	}, [targetLocations, radius]);
+	}, [targetLocations]);
 
 	return { isWithinRadius, altitude };
 };
