@@ -1,4 +1,3 @@
-import { useGeolocation } from '@/hooks/useGeolocation';
 import { useFirstLoad } from '@/hooks/useFirstLoad';
 import StampCard from '@/components/StampCard';
 import { Button } from '@/components/ui/button';
@@ -13,22 +12,19 @@ import {
 } from '@/components/ui/dialog';
 
 function GPS() {
-	const [isExplanationOpen, setIsExplanationOpen, selectedLocations] =
+	const [isExplanationOpen, setIsExplanationOpen, , isWithinRadius] =
 		useFirstLoad();
-	const radius = 30;
-
-	const stamps = useGeolocation(selectedLocations, radius);
 
 	return (
 		<div className="h-screen w-screen bg-gray-100">
-			<Map></Map>
+			<Map />
 			<div className="fixed right-4 bottom-4 space-x-1">
 				<Dialog>
 					<DialogTrigger>
 						<Button className="bg-green-600">スタンプ</Button>
 					</DialogTrigger>
 					<DialogContent className="w-4/5">
-						<StampCard stamps={stamps.isWithinRadius} />
+						<StampCard stamps={isWithinRadius} />
 					</DialogContent>
 				</Dialog>
 				<Dialog open={isExplanationOpen} onOpenChange={setIsExplanationOpen}>
