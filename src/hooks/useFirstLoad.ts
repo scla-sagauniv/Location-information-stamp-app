@@ -9,7 +9,7 @@ export const useFirstLoad = (): [
 	isWithinRadius: boolean[],
 	altitude: number | null,
 ] => {
-	const radius = 30;
+	const radius = 10;
 	const [isExplanationOpen, setIsExplanationOpen] = useState<boolean>(false);
 	const [selectedLocations, setSelectedLocations] = useState<Location[]>([]);
 	const [isWithinRadius, setIsWithinRadius] = useState<boolean[]>([]);
@@ -29,9 +29,9 @@ export const useFirstLoad = (): [
 			locations = JSON.parse(savedLocations);
 		} else {
 			const targetLocations: Location[] = [
-				{ lat: 33.2382305, lon: 130.2962176, name: '佐賀大学' },
-				{ lat: 33.24, lon: 130.297, name: '熊本大学' },
-				{ lat: 33.2382305, lon: 130.2962176, name: '福岡大学' },
+				{ lat: 33.2439556, lon: 130.2929972, name: '熊本大学' },
+				{ lat: 33.2383057, lon: 130.2961993, name: '福岡大学' },
+				{ lat: 33.2383057, lon: 130.2961993, name: '福岡大学' },
 				{ lat: 33.2382305, lon: 130.2962176, name: '長崎大学' },
 				{ lat: 33.24, lon: 130.297, name: '大分大学' },
 				{ lat: 33.2382305, lon: 130.2962176, name: '九州大学' },
@@ -41,7 +41,6 @@ export const useFirstLoad = (): [
 			localStorage.setItem('selectedLocations', JSON.stringify(locations));
 		}
 		setSelectedLocations(locations);
-
 		// selectedLocations がセットされてから watchGeolocation を呼び出す
 		if (locations.length > 0) {
 			const watchIds = watchGeolocation(
@@ -50,10 +49,7 @@ export const useFirstLoad = (): [
 				setIsWithinRadius,
 				setAltitude,
 			);
-
-			return () => {
-				watchIds.forEach((id) => navigator.geolocation.clearWatch(id));
-			};
+			console.log('watchIds', watchIds);
 		}
 	}, []);
 

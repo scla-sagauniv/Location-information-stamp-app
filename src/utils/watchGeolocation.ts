@@ -17,6 +17,13 @@ export const watchGeolocation = (
 					targetLocation.lon,
 				);
 
+				console.log('位置情報取得:', {
+					latitude: position.coords.latitude,
+					longitude: position.coords.longitude,
+					altitude: position.coords.altitude,
+					accuracy: position.coords.accuracy,
+				});
+
 				setIsWithinRadius((prevIsWithinRadius) => {
 					const updatedIsWithinRadius = [...prevIsWithinRadius];
 
