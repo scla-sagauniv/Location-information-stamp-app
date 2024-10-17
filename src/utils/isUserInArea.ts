@@ -11,11 +11,9 @@ const isUserInArea = (area: Location[], location: Location): boolean => {
 		polygonPoints.push(tp);
 	}
 	polygonPoints.push(polygonPoints[0]);
-	console.log(polygonPoints);
 
 	const polygon = turf.polygon([polygonPoints]); // 多角形を定義
 	const point = turf.point([location.lon, location.lat]); // 判定する点を定義
-	console.log(point);
 
 	// 範囲内判定
 	const isInside = turf.booleanPointInPolygon(point, polygon);
