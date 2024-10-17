@@ -1,4 +1,4 @@
-import useIsUserInArea from '@/api/useIsUserInArea';
+import useIsUserInArea from '@/utils/isUserInArea';
 import { Location } from '@/types';
 
 function Test() {

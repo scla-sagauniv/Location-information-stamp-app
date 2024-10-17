@@ -3,7 +3,7 @@ import { Location } from '@/types';
 import { useState } from 'react';
 // 指定したエリアに指定した座標が存在するか判定する
 
-const useIsUserInArea = (area: Location[], location: Location): boolean => {
+const isUserInArea = (area: Location[], location: Location): boolean => {
 	// 多角形を定義する4点の緯度経度
 	// 図書館
 	// (33.2418049, 130.2906834)
@@ -42,4 +42,4 @@ const useIsUserInArea = (area: Location[], location: Location): boolean => {
 	return isInside;
 };
 
-export default useIsUserInArea;
+export default isUserInArea;
