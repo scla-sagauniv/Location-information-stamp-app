@@ -2,13 +2,6 @@ import * as turf from '@turf/turf';
 import { Location } from '@/types';
 import { useState } from 'react';
 // 指定したエリアに指定した座標が存在するか判定する
-// 要求するオブジェクトの型
-/**
- * area
- * {locations:[{lat:33.2418049, lon:130.2906834},{lat:33.2418049, lon:130.2906834}...]}
- * location
- * {lat:33.2418049, lon:130.2906834}
- */
 
 const useIsUserInArea = (area: Location[], location: Location): boolean => {
 	// 多角形を定義する4点の緯度経度
