@@ -35,21 +35,20 @@ export const useFirstLoad = (): [
 			locations = JSON.parse(savedLocations);
 		} else {
 			const targetLocations: Location[] = [
-				{ lat: 33.2439556, lon: 130.2929972, name: '熊本大学' },
-				{ lat: 33.2383057, lon: 130.2961993, name: '福岡大学' },
-				{ lat: 33.2383057, lon: 130.2961993, name: '福岡大学' },
-				{ lat: 33.2382305, lon: 130.2962176, name: '長崎大学' },
-				{ lat: 33.24, lon: 130.297, name: '大分大学' },
-				{ lat: 33.2382305, lon: 130.2962176, name: '九州大学' },
+				{ lat: 33.2439556, lon: 130.2929972, name: '図書館', id: 9 },
+				{ lat: 33.2383057, lon: 130.2961993, name: 'ステージ', id: 10 },
+				{ lat: 33.2383057, lon: 130.2961993, name: 'バザー', id: 7 },
+				{ lat: 33.2382305, lon: 130.2962176, name: 'キッチンカーなど', id: 4 },
+				{ lat: 33.24, lon: 130.297, name: '教養2号館', id: 2 },
+				{ lat: 33.2382305, lon: 130.2962176, name: '教養1号館', id: 1 },
+				{ lat: 33.2382305, lon: 130.2962176, name: '美術館', id: 6 },
 			];
-			//const randomLocations = targetLocations.sort(() => 0.5 - Math.random());
 
-			// const id: number[] = [];
-			// for (let i = 0; i < 6; i++) {
-			// 	id.push(i);
-			// }
+			//配列をシャッフル
 			const randomLocations = targetLocations.sort(() => 0.5 - Math.random());
+			// 配列の先頭から3つを取得
 			locations = randomLocations.slice(0, 3);
+			// 選択した場所をlocalStorageに保存
 			localStorage.setItem('selectedLocations', JSON.stringify(locations));
 		}
 		setSelectedLocations(locations);
