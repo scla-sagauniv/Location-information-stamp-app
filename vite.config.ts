@@ -4,6 +4,7 @@ import path from 'path';
 
 export default defineConfig({
 	plugins: [react()],
+	base: '/c-stamp/',
 	server: {
 		host: true,
 		port: 5173,
