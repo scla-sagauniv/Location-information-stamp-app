@@ -22,7 +22,7 @@ function GPS() {
 
 	return (
 		<div className="h-screen w-screen bg-gray-100">
-			<div className="fixed top-4 left-4 bg-white p-2 rounded shadow-md">
+			<div className="fixed top-4 left-4 bg-white p-2 rounded shadow-md z-10">
 				<div>{currentLocationId}</div>
 				<p>現在の位置:</p>
 				{position ? (

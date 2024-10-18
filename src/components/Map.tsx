@@ -9,8 +9,8 @@ function Map() {
 	// 	}
 	// ]
 	return (
-		<div className="overflow-x-scroll">
-			<div className="relative flex h-screen w-[884px]">
+		<div className="overflow-x-scroll overflow-y-scroll">
+			<div className="relative flex h-[844px] w-[884px] bg-gray-100">
 				<MapBlock
 					className="absolute left-[64px] bottom-[64px] w-[128px] h-[128px]"
 					label="図書館"
