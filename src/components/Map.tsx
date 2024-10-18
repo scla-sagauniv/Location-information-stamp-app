@@ -1,53 +1,67 @@
 import MapBlock from '@/components/MapBlock';
 
 function Map() {
-	// const blacks = [
-	// 	{
-	// 		className: "absolute left-[64px] bottom-[64px] w-[128px] h-[128px]",
-	// 		label: "図書館",
-	// 		color: "bg-red-100 border-red-400"
-	// 	}
-	// ]
+	const blocks = [
+		{
+			className: 'absolute left-[64px] bottom-[64px] w-[128px] h-[128px]',
+			label: '図書館',
+			color: 'bg-red-100 border-red-400',
+			id: 9,
+		},
+		{
+			className: 'absolute left-[64px] bottom-[256px] w-[128px] h-[256px]',
+			label: 'ステージ',
+			id: 10,
+		},
+		{
+			className: 'absolute left-[64px] bottom-[192px] w-[300px] h-[64px]',
+			label: '通路',
+			id: 8,
+		},
+		{
+			className: 'absolute left-[364px] bottom-[192px] w-[200px] h-[64px]',
+			label: 'バザー',
+			id: 7,
+		},
+		{
+			className: 'absolute left-[564px] bottom-[192px] w-[64px] h-[600px]',
+			label: 'バザー',
+			id: 0,
+		},
+		{
+			className: 'absolute left-[436px] bottom-[64px] w-[192px] h-[128px]',
+			label: 'キッチンカーなど',
+			id: 4,
+		},
+		{
+			className: 'absolute left-[628px] bottom-[664px] w-[192px] h-[128px]',
+			label: '教養2号館',
+			id: 2,
+		},
+		{
+			className: 'absolute left-[628px] bottom-[536px] w-[192px] h-[128px]',
+			label: '教養1号館',
+			id: 1,
+		},
+		{
+			className: 'absolute left-[436px] bottom-[600px] w-[128px] h-[192px]',
+			label: '美術館',
+			id: 6,
+		},
+	];
+
 	return (
 		<div className="overflow-x-scroll">
 			<div className="relative flex h-screen w-[884px]">
-				<MapBlock
-					className="absolute left-[64px] bottom-[64px] w-[128px] h-[128px]"
-					label="図書館"
-					color="bg-red-100 border-red-400"
-				/>
-				<MapBlock
-					className="absolute left-[64px] bottom-[256px] w-[128px] h-[256px]"
-					label="ステージ"
-				/>
-				<MapBlock
-					className="absolute left-[64px] bottom-[192px] w-[300px] h-[64px]"
-					label="通路"
-				/>
-				<MapBlock
-					className="absolute left-[364px] bottom-[192px] w-[200px] h-[64px]"
-					label="バザー"
-				/>
-				<MapBlock
-					className="absolute left-[564px] bottom-[192px] w-[64px] h-[600px]"
-					label="バザー"
-				/>
-				<MapBlock
-					className="absolute left-[436px] bottom-[64px] w-[192px] h-[128px]"
-					label="キッチンカーなど"
-				/>
-				<MapBlock
-					className="absolute left-[628px] bottom-[664px] w-[192px] h-[128px]"
-					label="教養2号館"
-				/>
-				<MapBlock
-					className="absolute left-[628px] bottom-[536px] w-[192px] h-[128px]"
-					label="教養1号館"
-				/>
-				<MapBlock
-					className="absolute left-[436px] bottom-[600px] w-[128px] h-[192px]"
-					label="美術館"
-				/>
+				{blocks.map((block, index) => (
+					<MapBlock
+						key={index}
+						className={block.className}
+						label={block.label}
+						color={block.color}
+						id={block.id}
+					/>
+				))}
 			</div>
 		</div>
 	);
