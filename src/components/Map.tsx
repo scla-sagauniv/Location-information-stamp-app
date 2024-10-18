@@ -55,7 +55,7 @@ function Map({ currentLocationId }: MapProps) {
 	console.log('currentLocationId', currentLocationId);
 
 	return (
-		<div className="overflow-x-scroll overflow-y-scroll">
+		<div className="overflow-x-scroll overflow-y-scroll h-screen w-screen">
 			<div className="relative flex w-[884px] h-[844px] bg-gray-100">
 				{blocks.map((block, index) => {
 					const addCurrentAreaClass =
