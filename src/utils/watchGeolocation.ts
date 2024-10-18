@@ -1,8 +1,10 @@
-import { calculateDistanceUsingHaversine } from '@/utils/calculateHaversine';
-import { Location } from '@/types';
+// import { calculateDistanceUsingHaversine } from '@/utils/calculateHaversine';
+// import { Location } from '@/types';
+// import mapLocations from '@/data/mapLocations.json'
+// import { Position } from 'geojson';
 
 export const watchGeolocation = (
-	targetLocations: Location[],
+	targetLocations: number[],
 	radius: number,
 	setIsWithinRadius: React.Dispatch<React.SetStateAction<boolean[]>>,
 	setAltitude: (altitude: number | null) => void,
@@ -10,12 +12,12 @@ export const watchGeolocation = (
 	const watchIds: number[] = targetLocations.map((targetLocation, index) =>
 		navigator.geolocation.watchPosition(
 			(position) => {
-				const distance = calculateDistanceUsingHaversine(
-					position.coords.latitude,
-					position.coords.longitude,
-					targetLocation.lat,
-					targetLocation.lon,
-				);
+				// const distance = calculateDistanceUsingHaversine(
+				// 	position.coords.latitude,
+				// 	position.coords.longitude,
+				// 	targetLocation.lat,
+				// 	targetLocation.lon,
+				// );
 
 				console.log('位置情報取得:', {
 					latitude: position.coords.latitude,

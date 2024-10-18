@@ -1,8 +1,8 @@
 import * as turf from '@turf/turf';
 import { Location } from '@/types';
 import { Position } from 'geojson';
-// 指定したエリアに指定した座標が存在するか判定する
 
+// 指定したエリアに指定した座標が存在するか判定する
 const isUserInArea = (area: Location[], location: Location): boolean => {
 	// 多角形を定義する4点の緯度経度
 	const polygonPoints: Position[] = [];

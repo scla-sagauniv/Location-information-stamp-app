@@ -8,7 +8,7 @@ function useWatchGeoLocation() {
 	useEffect(() => {
 		if ('geolocation' in navigator) {
 			// ブラウザのサポートを確認
-			const watchId = navigator.geolocation.watchPosition(
+			navigator.geolocation.watchPosition(
 				(position) => {
 					setLocation({
 						lat: position.coords.latitude,
@@ -27,9 +27,9 @@ function useWatchGeoLocation() {
 			);
 
 			// コンポーネントがアンマウントされたときに監視を停止する
-			return () => {
-				navigator.geolocation.clearWatch(watchId);
-			};
+			// return () => {
+			// 	navigator.geolocation.clearWatch(watchId);
+			// };
 		} else {
 			console.error('Geolocation is not supported by this browser.');
 		}
