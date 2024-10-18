@@ -10,11 +10,29 @@ import {
 } from '@/components/ui/dialog';
 
 function GPS() {
-	const [isExplanationOpen, setIsExplanationOpen, , isWithinRadius] =
-		useFirstLoad();
+	const [
+		isExplanationOpen,
+		setIsExplanationOpen,
+		,
+		isWithinRadius,
+		,
+		position,
+	] = useFirstLoad();
 
 	return (
 		<div className="h-screen w-screen bg-gray-100">
+			<div className="fixed top-4 left-4 bg-white p-2 rounded shadow-md">
+				<p>現在の位置:</p>
+				{position ? (
+					<>
+						<p>緯度: {position.lat}</p>
+						<p>経度: {position.lon}</p>
+					</>
+				) : (
+					<p>取得中...</p>
+				)}
+			</div>
+
 			<Map />
 			<div className="fixed right-4 bottom-4 space-x-1">
 				<Dialog>

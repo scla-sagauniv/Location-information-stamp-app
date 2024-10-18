@@ -6,6 +6,7 @@ export const watchGeolocation = (
 	radius: number,
 	setIsWithinRadius: React.Dispatch<React.SetStateAction<boolean[]>>,
 	setAltitude: (altitude: number | null) => void,
+	setPosition: (position: Location) => void,
 ): number[] => {
 	const watchIds: number[] = targetLocations.map((targetLocation, index) =>
 		navigator.geolocation.watchPosition(
@@ -22,6 +23,12 @@ export const watchGeolocation = (
 					longitude: position.coords.longitude,
 					altitude: position.coords.altitude,
 					accuracy: position.coords.accuracy,
+				});
+
+				// 位置情報をセット
+				setPosition({
+					lat: position.coords.latitude,
+					lon: position.coords.longitude,
 				});
 
 				setIsWithinRadius((prevIsWithinRadius) => {
