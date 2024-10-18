@@ -24,5 +24,10 @@ export default [
 			'react/jsx-uses-react': 'off',
 			'react/prop-types': 'off',
 		},
+		settings: {
+			react: {
+				version: 'detect',
+			},
+		},
 	},
 ];
