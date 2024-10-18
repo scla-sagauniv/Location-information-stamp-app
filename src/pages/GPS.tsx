@@ -35,7 +35,7 @@ function GPS() {
 				)}
 			</div>
 
-			<Map />
+			<Map currentLocationId={currentLocationId} />
 			<div className="fixed right-4 bottom-4 space-x-1">
 				<Dialog>
 					<DialogTrigger>

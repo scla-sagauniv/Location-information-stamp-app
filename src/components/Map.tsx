@@ -1,11 +1,14 @@
 import MapBlock from '@/components/MapBlock';
 
-function Map() {
+type MapProps = {
+	currentLocationId: number | null;
+};
+
+function Map({ currentLocationId }: MapProps) {
 	const blocks = [
 		{
 			className: 'absolute left-[64px] bottom-[64px] w-[128px] h-[128px]',
 			label: '図書館',
-			color: 'bg-red-100 border-red-400',
 			id: 9,
 		},
 		{
@@ -49,19 +52,24 @@ function Map() {
 			id: 6,
 		},
 	];
+	console.log('currentLocationId', currentLocationId);
 
 	return (
 		<div className="overflow-x-scroll">
 			<div className="relative flex h-screen w-[884px]">
-				{blocks.map((block, index) => (
-					<MapBlock
-						key={index}
-						className={block.className}
-						label={block.label}
-						color={block.color}
-						id={block.id}
-					/>
-				))}
+				{blocks.map((block, index) => {
+					const addCurrentAreaClass =
+						currentLocationId === block.id ? 'bg-red-100 border-red-400' : '';
+
+					return (
+						<MapBlock
+							key={index}
+							className={`${block.className} ${addCurrentAreaClass}`}
+							label={block.label}
+							id={block.id}
+						/>
+					);
+				})}
 			</div>
 		</div>
 	);
