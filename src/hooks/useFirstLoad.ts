@@ -9,6 +9,7 @@ export const useFirstLoad = (): [
 	isWithinRadius: boolean[],
 	altitude: number | null,
 	position: Location | null, // 'Location | null'に変更
+	currentLocationId: number | null,
 ] => {
 	const radius = 10;
 	const [isExplanationOpen, setIsExplanationOpen] = useState<boolean>(false);
@@ -16,6 +17,9 @@ export const useFirstLoad = (): [
 	const [isWithinRadius, setIsWithinRadius] = useState<boolean[]>([]);
 	const [altitude, setAltitude] = useState<number | null>(null);
 	const [position, setPosition] = useState<Location | null>(null); // 初期値をnullに設定
+	const [currentLocationId, setCurrentLocationId] = useState<number | null>(
+		null,
+	);
 
 	useEffect(() => {
 		// モーダル表示チェック
@@ -58,6 +62,7 @@ export const useFirstLoad = (): [
 				setIsWithinRadius,
 				setAltitude,
 				setPosition,
+				setCurrentLocationId,
 			);
 			console.log('watchIds', watchIds);
 		}
@@ -70,5 +75,6 @@ export const useFirstLoad = (): [
 		isWithinRadius,
 		altitude,
 		position,
+		currentLocationId,
 	];
 };

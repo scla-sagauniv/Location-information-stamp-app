@@ -1,7 +1,6 @@
 import { calculateDistanceUsingHaversine } from '@/utils/calculateHaversine';
+import { getCurrentLocation } from '@/utils/getCurrentLocation';
 import { Location } from '@/types';
-// import mapLocations from '@/data/mapLocations.json'
-// import { Position } from 'geojson';
 
 export const watchGeolocation = (
 	targetLocations: Location[],
@@ -9,6 +8,7 @@ export const watchGeolocation = (
 	setIsWithinRadius: React.Dispatch<React.SetStateAction<boolean[]>>,
 	setAltitude: (altitude: number | null) => void,
 	setPosition: (position: Location) => void,
+	setCurrentLocationId: (currentLocationId: number | null) => void,
 ): number[] => {
 	const watchIds: number[] = targetLocations.map((targetLocation, index) =>
 		navigator.geolocation.watchPosition(
@@ -33,6 +33,13 @@ export const watchGeolocation = (
 					lon: position.coords.longitude,
 				});
 
+				const currentLocationId = getCurrentLocation({
+					lat: position.coords.latitude,
+					lon: position.coords.longitude,
+				});
+
+				setCurrentLocationId(currentLocationId);
+
 				setIsWithinRadius((prevIsWithinRadius) => {
 					const updatedIsWithinRadius = [...prevIsWithinRadius];
 
@@ -53,7 +60,7 @@ export const watchGeolocation = (
 			{
 				enableHighAccuracy: true,
 				timeout: 10000,
-				maximumAge: 5000,
+				maximumAge: 0,
 			},
 		),
 	);

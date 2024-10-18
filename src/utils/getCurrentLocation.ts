@@ -5,7 +5,7 @@ import { Location } from '@/types';
 // ユーザーがマップ上のどこに存在するか判定する
 // ユーザーがマップ上にいた場合，該当する場所のidを返す
 // 存在しない場合-1を返す
-const getCurrentLocation = (location: Location): number => {
+export const getCurrentLocation = (location: Location): number => {
 	let isInside: number = -1;
 	for (let i = 0; i < mapLocations.length; i++) {
 		if (isUserInArea(mapLocations[i].area, location)) {
@@ -16,5 +16,3 @@ const getCurrentLocation = (location: Location): number => {
 
 	return isInside;
 };
-
-export default getCurrentLocation;
