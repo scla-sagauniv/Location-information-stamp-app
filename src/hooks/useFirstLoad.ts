@@ -8,12 +8,14 @@ export const useFirstLoad = (): [
 	selectedLocations: number[],
 	isWithinRadius: boolean[],
 	altitude: number | null,
+	position: Location | null, // 'Location | null'に変更
 ] => {
 	const radius = 10;
 	const [isExplanationOpen, setIsExplanationOpen] = useState<boolean>(false);
 	const [selectedLocations, setSelectedLocations] = useState<number[]>([]);
 	const [isWithinRadius, setIsWithinRadius] = useState<boolean[]>([]);
 	const [altitude, setAltitude] = useState<number | null>(null);
+	const [position, setPosition] = useState<Location | null>(null); // 初期値をnullに設定
 
 	useEffect(() => {
 		// モーダル表示チェック
@@ -47,6 +49,7 @@ export const useFirstLoad = (): [
 			localStorage.setItem('selectedLocations', JSON.stringify(locations));
 		}
 		setSelectedLocations(locations);
+
 		// selectedLocations がセットされてから watchGeolocation を呼び出す
 		if (locations.length > 0) {
 			const watchIds = watchGeolocation(
@@ -54,6 +57,7 @@ export const useFirstLoad = (): [
 				radius,
 				setIsWithinRadius,
 				setAltitude,
+				setPosition,
 			);
 			console.log('watchIds', watchIds);
 		}
@@ -65,5 +69,6 @@ export const useFirstLoad = (): [
 		selectedLocations,
 		isWithinRadius,
 		altitude,
+		position,
 	];
 };
