@@ -51,6 +51,16 @@ function Map({ currentLocationId }: MapProps) {
 			label: '美術館',
 			id: 6,
 		},
+		{
+			className: 'absolute left-[436px] bottom-[350px] w-[128px] h-[64px]',
+			label: '古着出店',
+			id: 5,
+		},
+		{
+			className: 'absolute left-[628px] bottom-[386px] w-[192px] h-[128px]',
+			label: '銅像',
+			id: 3,
+		},
 	];
 	console.log('currentLocationId', currentLocationId);
 
