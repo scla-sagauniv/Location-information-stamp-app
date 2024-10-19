@@ -13,7 +13,7 @@ function GPS() {
 	const [
 		isExplanationOpen,
 		setIsExplanationOpen,
-		selectedLocations, // 追加: selectedLocationsを取得
+		selectedLocations,
 		isWithinRadius,
 		,
 		position,
@@ -31,7 +31,7 @@ function GPS() {
 						<p>経度: {position.lon}</p>
 						<p>選択した場所:</p>
 						{selectedLocations.map((location, index) => (
-							<p key={index}>{location.name}</p> // 追加: nameを表示
+							<p key={index}>{location.name}</p>
 						))}
 					</>
 				) : (
@@ -39,7 +39,10 @@ function GPS() {
 				)}
 			</div>
 
-			<Map currentLocationId={currentLocationId} />
+			<Map
+				currentLocationId={currentLocationId}
+				selectedLocations={selectedLocations}
+			/>
 			<div className="fixed right-4 bottom-4 space-x-1">
 				<Dialog>
 					<DialogTrigger>

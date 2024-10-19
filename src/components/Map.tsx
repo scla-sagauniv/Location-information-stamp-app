@@ -2,9 +2,10 @@ import MapBlock from '@/components/MapBlock';
 
 type MapProps = {
 	currentLocationId: number | null;
+	selectedLocations: { id: number }[];
 };
 
-function Map({ currentLocationId }: MapProps) {
+function Map({ currentLocationId, selectedLocations }: MapProps) {
 	const blocks = [
 		{
 			className: 'absolute left-[64px] bottom-[64px] w-[128px] h-[128px]',
@@ -61,12 +62,17 @@ function Map({ currentLocationId }: MapProps) {
 					const addCurrentAreaClass =
 						currentLocationId === block.id ? 'bg-red-100 border-red-400' : '';
 
+					const mark = selectedLocations.some(
+						(location) => location.id === block.id,
+					);
+
 					return (
 						<MapBlock
 							key={index}
 							className={`${block.className} ${addCurrentAreaClass}`}
 							label={block.label}
 							id={block.id}
+							mark={mark}
 						/>
 					);
 				})}

@@ -1,9 +1,9 @@
 // import { calculateDistanceUsingHaversine } from '@/utils/calculateHaversine';
 import { getCurrentLocation } from '@/utils/getCurrentLocation';
-import { Location } from '@/types';
+import { targetLocation, Location } from '@/types';
 
 export const watchGeolocation = (
-	targetLocations: Location[],
+	targetLocations: targetLocation[],
 	radius: number,
 	setIsWithinRadius: React.Dispatch<React.SetStateAction<boolean[]>>,
 	setAltitude: (altitude: number | null) => void,
@@ -13,12 +13,6 @@ export const watchGeolocation = (
 	const watchIds: number[] = targetLocations.map((targetLocation, index) =>
 		navigator.geolocation.watchPosition(
 			(position) => {
-				// const distance = calculateDistanceUsingHaversine(
-				// 	position.coords.latitude,
-				// 	position.coords.longitude,
-				// 	targetLocation.lat,
-				// 	targetLocation.lon,
-				// );
 				console.log(radius);
 
 				console.log('位置情報取得:', {
@@ -44,15 +38,6 @@ export const watchGeolocation = (
 				setIsWithinRadius((prevIsWithinRadius) => {
 					const updatedIsWithinRadius = [...prevIsWithinRadius];
 
-					// if (localStorage.getItem(`isWithinRadius-${index}`) === 'true') {
-					// 	updatedIsWithinRadius[index] = true;
-					// } else if (distance <= radius && prevIsWithinRadius[index] !== true) {
-					// 	updatedIsWithinRadius[index] = true;
-					// 	localStorage.setItem(`isWithinRadius-${index}`, 'true');
-					// } else if (distance > radius && prevIsWithinRadius[index] !== false) {
-					// 	updatedIsWithinRadius[index] = false;
-					// 	localStorage.setItem(`isWithinRadius-${index}`, 'false');
-					// }
 					if (localStorage.getItem(`isWithinRadius-${index}`) === 'true') {
 						updatedIsWithinRadius[index] = true;
 					} else if (
