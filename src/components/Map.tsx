@@ -1,10 +1,17 @@
 import MapBlock from '@/components/MapBlock';
+import { Location } from '@/types';
 
 type MapProps = {
 	currentLocationId: number | null;
+	selectedLocations: Location[];
+	isWithinRadius: boolean[];
 };
 
-function Map({ currentLocationId }: MapProps) {
+function Map({
+	currentLocationId,
+	selectedLocations,
+	isWithinRadius,
+}: MapProps) {
 	const blocks = [
 		{
 			className: 'absolute left-[64px] bottom-[64px] w-[128px] h-[128px]',
@@ -52,7 +59,6 @@ function Map({ currentLocationId }: MapProps) {
 			id: 6,
 		},
 	];
-	console.log('currentLocationId', currentLocationId);
 
 	return (
 		<div className="overflow-x-scroll overflow-y-scroll">
@@ -61,12 +67,24 @@ function Map({ currentLocationId }: MapProps) {
 					const addCurrentAreaClass =
 						currentLocationId === block.id ? 'bg-red-100 border-red-400' : '';
 
+					// selectedLocationsに含まれている場所かどうかを確認
+					const locationIndex = selectedLocations.findIndex(
+						(location) => location.id === block.id,
+					);
+
+					// スタンプがある場所かどうか確認
+					// selectedLocations に含まれているかつ、その場所のスタンプがまだ獲得されていない場合は印を表示
+					const hasStamp =
+						locationIndex !== -1 && !isWithinRadius[locationIndex];
+
 					return (
 						<MapBlock
 							key={index}
 							className={`${block.className} ${addCurrentAreaClass}`}
 							label={block.label}
 							id={block.id}
+							hasStamp={locationIndex !== -1}
+							stampCollected={!hasStamp}
 						/>
 					);
 				})}

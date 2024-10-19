@@ -13,7 +13,7 @@ function GPS() {
 	const [
 		isExplanationOpen,
 		setIsExplanationOpen,
-		selectedLocations, // 追加: selectedLocationsを取得
+		selectedLocations,
 		isWithinRadius,
 		,
 		position,
@@ -39,7 +39,11 @@ function GPS() {
 				)}
 			</div>
 
-			<Map currentLocationId={currentLocationId} />
+			<Map
+				currentLocationId={currentLocationId}
+				selectedLocations={selectedLocations}
+				isWithinRadius={isWithinRadius}
+			/>
 			<div className="fixed right-4 bottom-4 space-x-1">
 				<Dialog>
 					<DialogTrigger>
