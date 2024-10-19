@@ -75,7 +75,9 @@ function Map({
 			<div className="relative flex w-[884px] h-[844px] bg-gray-300">
 				{blocks.map((block, index) => {
 					const addCurrentAreaClass =
-						currentLocationId === block.id ? 'bg-red-100 border-red-400' : '';
+						currentLocationId === block.id
+							? 'bg-red-100 border-red-400 text-red-400'
+							: '';
 
 					// selectedLocationsに含まれている場所かどうかを確認
 					const locationIndex = selectedLocations.findIndex(
