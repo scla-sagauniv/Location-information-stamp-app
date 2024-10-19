@@ -16,13 +16,14 @@ function GPS() {
 		selectedLocations,
 		isWithinRadius,
 		,
-		position,
+		,
+		//		position,
 		currentLocationId,
 	] = useFirstLoad();
 
 	return (
-		<div className="h-screen w-screen bg-gray-100">
-			<div className="fixed top-4 left-4 bg-white p-2 rounded shadow-md z-10">
+		<div className="h-screen w-screen bg-gray-300">
+			{/* <div className="fixed top-4 left-4 bg-white p-2 rounded shadow-md z-10">
 				<div>{currentLocationId}</div>
 				<p>現在の位置:</p>
 				{position ? (
@@ -37,7 +38,7 @@ function GPS() {
 				) : (
 					<p>取得中...</p>
 				)}
-			</div>
+			</div> */}
 
 			<Map
 				currentLocationId={currentLocationId}

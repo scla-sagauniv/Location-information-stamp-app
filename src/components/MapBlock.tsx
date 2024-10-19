@@ -10,7 +10,7 @@ type Props = {
 const MapBlock = ({ className, label, hasStamp, stampCollected }: Props) => {
 	return (
 		<div
-			className={`border border-black flex justify-center items-center border-2 ${className}`}
+			className={`border border-black flex justify-center items-center border-2 text-xl font-bold bg-white ${className}`}
 		>
 			{label}
 			{hasStamp && !stampCollected && <div>🎁</div>}

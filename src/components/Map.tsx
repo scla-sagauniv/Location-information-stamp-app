@@ -58,11 +58,21 @@ function Map({
 			label: '美術館',
 			id: 6,
 		},
+		{
+			className: 'absolute left-[436px] bottom-[350px] w-[128px] h-[64px]',
+			label: '古着出店',
+			id: 5,
+		},
+		{
+			className: 'absolute left-[628px] bottom-[386px] w-[192px] h-[128px]',
+			label: '銅像',
+			id: 3,
+		},
 	];
 
 	return (
-		<div className="overflow-x-scroll overflow-y-scroll">
-			<div className="relative flex w-[884px] h-[844px] bg-gray-100">
+		<div className="overflow-x-scroll overflow-y-scroll min-h-screen w-screen">
+			<div className="relative flex w-[884px] h-[844px] bg-gray-300">
 				{blocks.map((block, index) => {
 					const addCurrentAreaClass =
 						currentLocationId === block.id ? 'bg-red-100 border-red-400' : '';
