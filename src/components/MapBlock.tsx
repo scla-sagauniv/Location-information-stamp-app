@@ -8,7 +8,7 @@ type Props = {
 const MapBlock = ({ className, label }: Props) => {
 	return (
 		<div
-			className={`border border-black flex justify-center items-center border-2 text-xl font-bold ${className}`}
+			className={`border border-black flex justify-center items-center border-2 text-xl font-bold bg-white ${className}`}
 		>
 			{label}
 		</div>
