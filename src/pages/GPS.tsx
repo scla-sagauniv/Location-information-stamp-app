@@ -13,16 +13,18 @@ function GPS() {
 	const [
 		isExplanationOpen,
 		setIsExplanationOpen,
-		selectedLocations, // 追加: selectedLocationsを取得
+		,
+		//		selectedLocations, // 追加: selectedLocationsを取得
 		isWithinRadius,
 		,
-		position,
+		,
+		//		position,
 		currentLocationId,
 	] = useFirstLoad();
 
 	return (
-		<div className="h-screen w-screen bg-gray-100">
-			<div className="fixed top-4 left-4 bg-white p-2 rounded shadow-md z-10">
+		<div className="h-screen w-screen bg-gray-300">
+			{/* <div className="fixed top-4 left-4 bg-white p-2 rounded shadow-md z-10">
 				<div>{currentLocationId}</div>
 				<p>現在の位置:</p>
 				{position ? (
@@ -37,7 +39,7 @@ function GPS() {
 				) : (
 					<p>取得中...</p>
 				)}
-			</div>
+			</div> */}
 
 			<Map currentLocationId={currentLocationId} />
 			<div className="fixed right-4 bottom-4 space-x-1">
